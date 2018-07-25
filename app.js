@@ -19,7 +19,8 @@ var userRoutes = require('./routes/user');
 
 var app = express();
 
-mongoose.connect('mongodb://ola:Neroxrox5(@ds121861.mlab.com:21861/foosballshopping');
+mongoose.connect('ola:Neroxrox5(@ds121861.mlab.com:21861/foosball');
+
 require('./config/passport');
 
 // view engine setup
