@@ -10,17 +10,20 @@ var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
+//! För valideringen av email-adresser
 var MongoStore = require('connect-mongo')(session);
+
 
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
 
 var app = express();
 
-mongoose.connect('localhost:27017/shopping');
+mongoose.connect('localhost:27017/foosballshopping');
 require('./config/passport');
 
 // view engine setup
+// app.engine('.hbs', expressHbs({ extname: '.hbs'}));
 app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
@@ -29,23 +32,26 @@ app.set('view engine', '.hbs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(validator());
+app.use(validator()); //! Måste vara efter bodyParser
 app.use(cookieParser());
 app.use(session({
   secret: 'mysupersecret', 
   resave: false, 
   saveUninitialized: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  cookie: { maxAge: 180 * 60 * 1000 }
+  store: new MongoStore({ mongooseConnection: mongoose.connection }), //! MongoStore - ger möjlighet att spara sessionen i mongodb
+  cookie: { maxAge: 180 * 60 * 1000 } //! Sätter hur länge cookien (sessionen) skall vara aktiv - 180 minuter som det är nu
 }));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, '../public')));
+
 app.use(function(req, res, next) {
-    res.locals.login = req.isAuthenticated();
-    res.locals.session = req.session;
+    res.locals.login = req.isAuthenticated(); //! Viktigt då det ger isAuthenticated tillgänglig till alla views
+    res.locals.session = req.session; //! Viktigt då det ger sessionen tillgänglig till alla views - kan alltid skickas med
     next();
 });
 

@@ -12,13 +12,15 @@ passport.deserializeUser(function (id, done) {
     });
 });
 
+
+//! Sign up strategy and validation
 passport.use('local.signup', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 }, function (req, email, password, done) {
-    req.checkBody('email', 'Invalid email').notEmpty().isEmail();
-    req.checkBody('password', 'Invalid password').notEmpty().isLength({min:4});
+    req.checkBody('email', 'Invalid email').notEmpty().isEmail(); //! Validation email
+    req.checkBody('password', 'Invalid password').notEmpty().isLength({min:4}); //! Validation email length
     var errors = req.validationErrors();
     if (errors) {
         var messages = [];
@@ -46,11 +48,13 @@ passport.use('local.signup', new LocalStrategy({
     });
 }));
 
+//! Sign in strategy and validation
 passport.use('local.signin', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 }, function(req, email, password, done) {
+    //* Validation from above
     req.checkBody('email', 'Invalid email').notEmpty().isEmail();
     req.checkBody('password', 'Invalid password').notEmpty();
     var errors = req.validationErrors();

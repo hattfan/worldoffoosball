@@ -1,10 +1,10 @@
-Stripe.setPublishableKey('pk_test_m6ZWLYyvkUAqJzr1fvr1uRj2');
+Stripe.setPublishableKey('pk_test_j2mgOBL1QDc6LkwgtXrCxkFo');
 
-var $form = $('#checkout-form');
+var $form = $('#checkout-form'); //! jQuery to select the form
 
 $form.submit(function (event) {
     $('#charge-error').addClass('hidden');
-    $form.find('button').prop('disabled', true);
+    $form.find('button').prop('disabled', true); //! disabled till true så att man inte kan klicka en massa gånger medans validation går
     Stripe.card.createToken({
         number: $('#card-number').val(),
         cvc: $('#card-cvc').val(),
@@ -15,6 +15,7 @@ $form.submit(function (event) {
     return false;
 });
 
+//! Tagen ifrån stripe:s hemsida
 function stripeResponseHandler(status, response) {
     if (response.error) { // Problem!
 

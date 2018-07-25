@@ -2,44 +2,39 @@ var Product = require('../models/product');
 
 var mongoose = require('mongoose');
 
-mongoose.connect('localhost:27017/shopping');
+mongoose.connect('localhost:27017/foosballshopping');
 
 var products = [
     new Product({
-        imagePath: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Gothiccover.png',
-        title: 'Gothic Video Game',
-        description: 'Awesome Game!!!!',
-        price: 10
+        imagePath: 'images/product-01.jpg',
+        title: 'Protable',
+        description: 'Game for championship tournaments',
+        price: 499
     }),
     new Product({
-        imagePath: 'http://eu.blizzard.com/static/_images/games/wow/wallpapers/wall2/wall2-1440x900.jpg',
-        title: 'World of Warcraft Video Game',
-        description: 'Also awesome? But of course it was better in vanilla ...',
-        price: 20
+        imagePath: 'images/product-02.jpg',
+        title: 'Midtable',
+        description: 'For your everyday workfun',
+        price: 399
     }),
     new Product({
-        imagePath: 'https://support.activision.com/servlet/servlet.FileDownload?file=00PU000000Rq6tz',
-        title: 'Call of Duty Video Game',
-        description: 'Meh ... nah, it\'s okay I guess',
-        price: 40
+        imagePath: 'images/product-03.jpg',
+        title: 'Lighttable',
+        description: 'For the weekend warrior tournaments',
+        price: 299
     }),
     new Product({
-        imagePath: 'https://pmcdeadline2.files.wordpress.com/2014/02/minecraft__140227211000.jpg',
-        title: 'Minecraft Video Game',
-        description: 'Now that is super awesome!',
-        price: 15
+        imagePath: 'images/product-04.jpg',
+        title: 'Balls',
+        description: 'A 3-pack of high quality balls',
+        price: 39
     }),
-    new Product({
-        imagePath: 'https://d1r7xvmnymv7kg.cloudfront.net/sites_products/darksouls3/assets/img/DARKSOUL_facebook_mini.jpg',
-        title: 'Dark Souls 3 Video Game',
-        description: 'I died!',
-        price: 50
-    })
 ];
 
 var done = 0;
 for (var i = 0; i < products.length; i++) {
     products[i].save(function(err, result) {
+        console.log('Inputted')
         done++;
         if (done === products.length) {
             exit();

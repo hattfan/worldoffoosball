@@ -1,24 +1,95 @@
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <h1>User Profile</h1>
-        <hr>
-        <h2>My Orders</h2>
-        {{# each orders }}
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <ul class="list-group">
-                        {{# each this.items }}
-                            <li class="list-group-item">
-                                <span class="badge">{{ this.price }}</span>
-                                {{ this.item.title }} | {{ this.qty }} Units
-                            </li>
-                        {{/each}}
-                    </ul>
-                </div>
-                <div class="panel-footer">
-                    <strong>Total Price: ${{ this.cart.totalPrice }}</strong>
-                </div>
-            </div>
-        {{/each}}
-    </div>
-</div>
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('/images/bg-01.jpg');">
+	<h2 class="ltext-105 cl0 txt-center">
+		Your Profile
+	</h2>
+</section>
+
+<!-- Content page -->
+<section class="bg0 p-t-104 p-b-116">
+	<div class="container">
+		<div class="flex-w flex-tr">
+			<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+				<form>
+					<h4 class="mtext-105 cl2 txt-center p-b-30">
+						Your Profile
+					</h4>
+					<div class="size-212 p-t-2">
+						<span class="mtext-110 cl2">
+							<i class="fa fa-envelope-o" aria-hidden="true"></i> Your Email
+						</span>
+						<p class="stext-115 cl1 size-213 p-t-18">
+							{{ user.email}}
+						</p>
+					</div>
+				</form>
+			</div>
+
+			<div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">
+				<div class="flex-w w-full p-b-42">
+					<span class="fs-18 cl5 txt-center size-211">
+						<span class="lnr lnr-phone-handset"></span>
+					</span>
+
+					<div class="size-212 p-t-2">
+						<span class="mtext-110 cl2">
+							Call us
+						</span>
+						<hr>
+						<p class="stext-115 cl1 size-213">
+							+46 765 77 04 29
+						</p>
+					</div>
+				</div>
+
+				<div class="flex-w w-full">
+					<span class="fs-18 cl5 txt-center size-211">
+						<span class="lnr lnr-envelope"></span>
+					</span>
+
+					<div class="size-212 p-t-2">
+						<span class="mtext-110 cl2">
+							Sale Support
+						</span>
+						<hr>
+						<a href="mailto:ola.anders.karlsson@gmail.com" class="stext-115 cl1 size-213 p-t-18">
+							ola.anders.karlsson@gmail.com
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="flex-w flex-c">
+			<div class="bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md" style="width: 100%">
+				<h4 class="mtext-105 cl2 txt-center p-b-30">
+					Your Orders
+				</h4>
+				{{# each orders }}
+				<div class="wrap-table-shopping-cart">
+					<table class="table-shopping-cart">
+						<tr class="table_head">
+							<th class="column-1">Product</th>
+							<th class="column-2">Product Name</th>
+							<th class="column-4">Quantity</th>
+							<th class="column-5">Total</th>
+						</tr>
+						{{# each this.items }}
+						<tr class="table_row">
+							<td class="column-1">
+								<div class="how-itemcart1">
+									<img src="/{{ this.item.imagePath }}" alt="IMG">
+								</div>
+							</td>
+							<td class="column-2">{{ this.item.title }}</td>
+							<td class="column-4">{{ this.qty }}</td>
+							<td class="column-5">$ {{ this.price }}</td>
+						</tr>
+						{{/each}}
+					</table>
+					<hr> 
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
