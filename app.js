@@ -19,7 +19,7 @@ var userRoutes = require('./routes/user');
 
 var app = express();
 
-mongoose.connect('localhost:27017/foosballshopping');
+mongoose.connect('mongodb://ola:Neroxrox5(@ds121861.mlab.com:21861/foosballshopping');
 require('./config/passport');
 
 // view engine setup
@@ -69,25 +69,34 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
+// if (app.get('env') === 'development') {
+//   app.use(function(err, req, res, next) {
+//     res.status(err.status || 500);
+//     res.render('error', {
+//       message: err.message,
+//       error: err
+//     });
+//   });
+// }
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+// // production error handler
+// // no stacktraces leaked to user
+// app.use(function(err, req, res, next) {
+//   res.status(err.status || 500);
+//   res.render('error', {
+//     message: err.message,
+//     error: {}
+//   });
+// });
+
+var port = process.env.PORT || 3000; 
+
+app.listen(port, process.env.IP, function () {
+    var appConsoleMsg = 'Hemsidan startad: ';
+    appConsoleMsg += process.env.IP + ':' + port;
+    console.log(appConsoleMsg);
 });
 
 
-module.exports = app;
+
+// module.exports = app;
